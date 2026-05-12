@@ -90,6 +90,7 @@ body {
   text-align: center;
   padding: clamp(24px, 6vw, 60px);
   gap: clamp(20px, 4vh, 32px);
+  opacity: 0;
   animation: heroIn 1.2s ease forwards 5s;
 }
 @keyframes heroIn {
@@ -102,6 +103,8 @@ body {
   letter-spacing: .18em;
   text-transform: uppercase;
   color: rgba(255,255,255,.6);
+  opacity: 0;
+  animation: heroIn 1s ease forwards 4.5s;
 }
 .hero-logo span { color: var(--orange); }
 
