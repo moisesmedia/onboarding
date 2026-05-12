@@ -88,10 +88,16 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: clamp(24px, 6vw, 60px);
+  padding: clamp(32px, 7vw, 60px) clamp(24px, 6vw, 48px);
   gap: clamp(20px, 4vh, 32px);
   opacity: 0;
-  animation: heroIn 1.2s ease forwards 5s;
+  transition: opacity 1.2s ease;
+  background: rgba(10, 10, 10, .55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.07);
+  max-width: clamp(280px, 85vw, 420px);
 }
 @keyframes heroIn {
   from { opacity: 0; transform: translateY(20px); }
