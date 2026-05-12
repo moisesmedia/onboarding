@@ -74,11 +74,7 @@ body {
   );
   z-index: 1;
   opacity: 0;
-  animation: overlayIn 1.2s ease forwards 4.5s;
-}
-@keyframes overlayIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  transition: opacity 1.2s ease;
 }
 .hero-content {
   position: relative;
@@ -88,20 +84,20 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: clamp(32px, 7vw, 60px) clamp(24px, 6vw, 48px);
-  gap: clamp(20px, 4vh, 32px);
+  padding: clamp(28px, 6vw, 48px) clamp(24px, 6vw, 44px);
+  gap: clamp(16px, 3vh, 28px);
   opacity: 0;
-  transition: opacity 1.2s ease;
-  background: rgba(10, 10, 10, .55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,.07);
-  max-width: clamp(280px, 85vw, 420px);
+  visibility: hidden;
+  transition: opacity 1.2s ease, visibility 0s linear 99s;
+  background: #000000;
+  border-radius: 18px;
+  max-width: clamp(260px, 82vw, 400px);
+  width: 100%;
 }
-@keyframes heroIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+.hero-content.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, visibility 0s linear 0s;
 }
 .hero-logo {
   font-size: clamp(13px, 3vw, 15px);
@@ -109,8 +105,6 @@ body {
   letter-spacing: .18em;
   text-transform: uppercase;
   color: rgba(255,255,255,.6);
-  opacity: 0;
-  animation: heroIn 1s ease forwards 4.5s;
 }
 .hero-logo span { color: var(--orange); }
 
@@ -1072,6 +1066,16 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.65; }
 </div>
 
 <script>
+// Hero timing — JS controlled for iOS/Android compatibility
+document.addEventListener('DOMContentLoaded', function() {
+  var overlay = document.querySelector('.hero-overlay');
+  var content = document.querySelector('.hero-content');
+  setTimeout(function() {
+    overlay.style.opacity = '1';
+    content.classList.add('visible');
+  }, 4500);
+});
+
 // Screen navigation
 function showProcess() {
   document.getElementById('heroScreen').classList.remove('active');
