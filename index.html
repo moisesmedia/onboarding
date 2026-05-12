@@ -3,48 +3,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="theme-color" content="#0D1B2A">
-<meta name="description" content="Client onboarding form — Moises Macias Digital Content">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="description" content="Client onboarding — Moises Macias Digital Content">
 <title>Let's Work Together — Moises Macias</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ── RESET & TOKENS ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --night:   #0D1B2A;
-  --mid:     #1B2D42;
-  --orange:  #E8622A;
+  --night: #0A0A0A;
+  --dark:  #111318;
+  --mid:   #1C2230;
+  --orange:#E8622A;
   --orange-l:#F4845F;
   --orange-p:#FDE8DC;
-  --cream:   #FAF8F5;
-  --mist:    #F0ECE6;
-  --gray:    #8A8F99;
-  --line:    #E4E6EC;
-  --white:   #FFFFFF;
-  --text:    #1B2D42;
-  --r:       14px;
-  --rs:      9px;
-  /* fluid spacing */
-  --space-xs: clamp(8px,  2vw, 12px);
-  --space-sm: clamp(12px, 3vw, 18px);
-  --space-md: clamp(18px, 4vw, 26px);
-  --space-lg: clamp(24px, 5vw, 36px);
+  --cream: #FAF8F5;
+  --mist:  #F0ECE6;
+  --gray:  #8A8F99;
+  --line:  #E4E6EC;
+  --white: #FFFFFF;
+  --text:  #1C2230;
+  --r: 14px;
+  --rs: 9px;
 }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Outfit', sans-serif;
   background: var(--cream);
   color: var(--text);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ══════════════════════════════════════
+   HERO SCREEN
+══════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.55) 0%,
+    rgba(0,0,0,.45) 50%,
+    rgba(0,0,0,.75) 100%
+  );
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(24px, 6vw, 60px);
+  gap: clamp(20px, 4vh, 32px);
+  animation: heroIn 1.2s ease forwards;
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-logo {
+  font-size: clamp(13px, 3vw, 15px);
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+}
+.hero-logo span { color: var(--orange); }
+
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform .3s ease;
+}
+.hero-cta:hover { transform: translateY(-4px); }
+.hero-cta:active { transform: scale(.96); }
+
+.click-ring {
+  width: clamp(80px, 18vw, 110px);
+  height: clamp(80px, 18vw, 110px);
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+.click-ring::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(232,98,42,.35);
+  animation: pulse 2.5s ease-in-out infinite .4s;
+}
+.click-ring::after {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(232,98,42,.15);
+  animation: pulse 2.5s ease-in-out infinite .8s;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.06); opacity: .7; }
+}
+.click-inner {
+  width: clamp(64px, 14vw, 88px);
+  height: clamp(64px, 14vw, 88px);
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.click-inner svg { width: clamp(20px, 5vw, 28px); height: clamp(20px, 5vw, 28px); }
+.click-inner span {
+  font-size: clamp(9px, 2vw, 11px);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.hero-phrase {
+  font-size: clamp(13px, 3.2vw, 16px);
+  font-weight: 400;
+  color: rgba(255,255,255,.8);
+  letter-spacing: .04em;
+  max-width: 320px;
+  line-height: 1.5;
+}
+.hero-phrase strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════════
+   PROCESS SCREEN
+══════════════════════════════════════ */
+.process-screen {
+  background: var(--night);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 60px);
+}
+.process-top {
+  text-align: center;
+  margin-bottom: clamp(36px, 7vw, 64px);
+  animation: fadeUp .7s ease forwards;
+}
+.process-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+.process-title {
+  font-size: clamp(26px, 6vw, 42px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -.5px;
+  margin-bottom: 14px;
+}
+.process-title span { color: var(--orange); }
+.process-sub {
+  font-size: clamp(14px, 3vw, 16px);
+  color: rgba(255,255,255,.45);
+  max-width: 480px;
+  margin: 0 auto;
   line-height: 1.6;
 }
 
-/* ── TOPBAR ── */
+/* 4 phases */
+.phases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(16px, 3vw, 24px);
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+.phase {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: clamp(20px, 4vw, 32px) clamp(16px, 3vw, 24px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: transform .3s ease, background .3s ease;
+}
+.phase.visible { animation: fadeUp .6s ease forwards; }
+.phase:hover { background: rgba(255,255,255,.07); transform: translateY(-3px); }
+.phase::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s ease;
+}
+.phase:hover::before { transform: scaleX(1); }
+
+.phase-num {
+  font-size: clamp(36px, 8vw, 52px);
+  font-weight: 900;
+  color: rgba(232,98,42,.15);
+  line-height: 1;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.phase-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+}
+.phase-title {
+  font-size: clamp(16px, 3.5vw, 20px);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.phase-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 10px;
+  display: block;
+}
+.phase-desc {
+  font-size: clamp(13px, 2.8vw, 14px);
+  color: rgba(255,255,255,.45);
+  line-height: 1.65;
+}
+
+.process-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: clamp(32px, 6vw, 56px) auto 0;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  padding: clamp(13px, 3vw, 16px) clamp(28px, 6vw, 48px);
+  border-radius: 99px;
+  font-size: clamp(14px, 3vw, 16px);
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: background .2s, transform .2s;
+  touch-action: manipulation;
+}
+.process-btn:hover { background: var(--orange-l); transform: translateY(-2px); }
+.process-btn:active { transform: scale(.97); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════
+   FORM SCREEN
+══════════════════════════════════════ */
+.form-screen { background: var(--cream); }
+
 .topbar {
   background: var(--night);
   padding: 13px clamp(16px, 4vw, 28px);
@@ -54,7 +323,6 @@ body {
   position: sticky;
   top: 0;
   z-index: 200;
-  box-shadow: 0 1px 0 rgba(255,255,255,.05);
 }
 .logo {
   font-family: 'Outfit', sans-serif;
@@ -62,106 +330,62 @@ body {
   font-size: clamp(14px, 3.5vw, 17px);
   color: #fff;
   letter-spacing: -.3px;
-  white-space: nowrap;
 }
 .logo span { color: var(--orange); }
 .stepctr {
   font-size: clamp(11px, 2.5vw, 13px);
   color: var(--gray);
   font-weight: 500;
-  white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 .progwrap { background: var(--mid); height: 3px; }
 .progfill { height: 100%; background: var(--orange); transition: width .45s cubic-bezier(.4,0,.2,1); }
 
-/* ── OUTER WRAPPER ── */
 .outer {
   max-width: 600px;
   margin: 0 auto;
   padding: 0 clamp(14px, 4vw, 24px) clamp(60px, 10vw, 100px);
+}
+
+/* STEP CARD */
+.step-card { display: none; margin-top: clamp(14px, 3vw, 20px); }
+.step-card.active { display: block; animation: stepIn .35s cubic-bezier(.4,0,.2,1); }
+@keyframes stepIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Animated step graphic */
+.sg-wrap {
   width: 100%;
-}
-
-/* ── WELCOME SCREEN ── */
-.welcome-screen { display: block; }
-.welcome-screen.hidden { display: none; }
-.form-area { display: none; }
-.form-area.visible { display: block; }
-
-.welcome { padding: clamp(28px, 6vw, 44px) 0 clamp(20px, 4vw, 32px); }
-
-/* Welcome graphic — SVG fills width, scales naturally */
-.wg {
-  width: 100%;
-  height: auto;
-  min-height: 140px;
-  max-height: 220px;
-  border-radius: var(--r);
-  display: block;
-  margin-bottom: var(--space-md);
-}
-
-.welcome h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(22px, 5.5vw, 30px);
-  font-weight: 800;
-  color: var(--night);
-  line-height: 1.15;
-  margin-bottom: clamp(10px, 2.5vw, 14px);
-  letter-spacing: -.5px;
-}
-.welcome h1 span { color: var(--orange); }
-.welcome p {
-  color: #5A6478;
-  font-size: clamp(14px, 3.5vw, 15px);
-  line-height: 1.75;
-  margin-bottom: var(--space-md);
-}
-.wmeta { display: flex; flex-direction: column; gap: clamp(8px, 2vw, 10px); margin-bottom: var(--space-md); }
-.mrow { display: flex; align-items: center; gap: 10px; font-size: clamp(12px, 3vw, 13px); color: var(--gray); }
-.mic {
-  width: 26px; height: 26px; min-width: 26px;
-  border-radius: 7px; background: var(--mist);
-  display: flex; align-items: center; justify-content: center;
-}
-
-.btn-start {
-  background: var(--orange);
-  color: #fff;
-  padding: clamp(12px, 3vw, 14px) 24px;
-  border-radius: var(--rs);
-  font-size: clamp(14px, 3.5vw, 15px);
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  transition: background .2s;
-}
-.btn-start:hover { background: var(--orange-l); }
-.btn-start:active { transform: scale(.98); }
-
-/* ── STEP CARD ── */
-.step-card { display: none; margin-top: clamp(14px, 3vw, 20px); animation: up .3s ease; }
-.step-card.active { display: block; }
-@keyframes up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Step graphic — key: preserveAspectRatio on SVG handles all screen sizes */
-.sg {
-  width: 100%;
-  height: auto;
-  min-height: 100px;
-  max-height: 160px;
   border-radius: var(--r) var(--r) 0 0;
+  overflow: hidden;
+  background: var(--night);
+  position: relative;
+}
+.sg-wrap svg {
+  width: 100%;
+  height: auto;
+  min-height: 110px;
+  max-height: 155px;
   display: block;
 }
+
+/* SVG animations */
+.anim-ring   { animation: spinRing 12s linear infinite; transform-origin: center; }
+.anim-pulse  { animation: svgPulse 3s ease-in-out infinite; }
+.anim-dash   { stroke-dasharray: 200; stroke-dashoffset: 200; animation: drawLine 2.5s ease forwards .3s; }
+.anim-wave   { animation: waveFlow 4s ease-in-out infinite; }
+.anim-float  { animation: floatDot 3s ease-in-out infinite; }
+.anim-rise   { animation: riseBar 1.5s cubic-bezier(.4,0,.2,1) forwards; transform-origin: bottom; }
+.anim-spin   { animation: rotateSlow 20s linear infinite; transform-origin: center; }
+.anim-trail  { animation: trailFade 2s ease-in-out infinite; }
+
+@keyframes spinRing   { to { transform: rotate(360deg); } }
+@keyframes svgPulse   { 0%,100% { opacity:.7; transform:scale(1); } 50% { opacity:1; transform:scale(1.08); } }
+@keyframes drawLine   { to { stroke-dashoffset: 0; } }
+@keyframes waveFlow   { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-12px); } }
+@keyframes floatDot   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes riseBar    { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes rotateSlow { to { transform: rotate(360deg); } }
+@keyframes trailFade  { 0%,100% { opacity:.5; transform:translateX(0); } 50% { opacity:.2; transform:translateX(6px); } }
 
 .sbody {
   background: var(--white);
@@ -170,67 +394,28 @@ body {
   border: 1px solid var(--line);
   border-top: none;
 }
+.slabel { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); margin-bottom: 3px; }
+.stitle { font-family: 'Outfit', sans-serif; font-size: clamp(18px, 4vw, 22px); font-weight: 700; color: var(--night); margin-bottom: 5px; line-height: 1.2; }
+.ssub { font-size: clamp(13px, 3vw, 14px); color: var(--gray); margin-bottom: clamp(18px, 4vw, 24px); line-height: 1.6; }
 
-.slabel {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 3px;
-}
-.stitle {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(17px, 4vw, 21px);
-  font-weight: 700;
-  color: var(--night);
-  margin-bottom: 5px;
-  line-height: 1.2;
-}
-.ssub {
-  font-size: clamp(12px, 3vw, 13px);
-  color: var(--gray);
-  margin-bottom: clamp(18px, 4vw, 24px);
-  line-height: 1.6;
-}
-
-/* ── FIELDS ── */
+/* Fields */
 .field { margin-bottom: clamp(16px, 4vw, 22px); }
-.fh {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-.flabel {
-  font-size: clamp(13px, 3.2vw, 14px);
-  font-weight: 500;
-  color: var(--night);
-  line-height: 1.4;
-  flex: 1;
-}
+.fh { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.flabel { font-size: clamp(13px, 3.2vw, 14px); font-weight: 500; color: var(--night); line-height: 1.4; flex: 1; }
 .flabel .req { color: var(--orange); margin-left: 1px; }
 
-/* Info button */
 .ibtn {
   width: 22px; height: 22px; min-width: 22px;
   border-radius: 50%;
   border: 1.5px solid var(--line);
   background: var(--mist);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: .2s;
-  padding: 0;
-  margin-top: 1px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: .2s; padding: 0; margin-top: 1px;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
-.ibtn:hover, .ibtn:focus { background: var(--orange); border-color: var(--orange); outline: none; }
-.ibtn:hover svg *, .ibtn:focus svg * { stroke: #fff; }
+.ibtn:hover { background: var(--orange); border-color: var(--orange); }
+.ibtn:hover svg * { stroke: #fff; }
 .ibtn svg { width: 12px; height: 12px; pointer-events: none; }
 
 .tip {
@@ -247,98 +432,48 @@ body {
 .tip.open { display: block; animation: fi .18s ease; }
 @keyframes fi { from { opacity: 0; } to { opacity: 1; } }
 
-/* ── INPUTS ── */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select,
-textarea {
+input[type="text"], input[type="email"], input[type="tel"], select, textarea {
   width: 100%;
   border: 1.5px solid var(--line);
   border-radius: var(--rs);
   padding: clamp(10px, 2.5vw, 12px) clamp(12px, 3vw, 14px);
-  font-size: clamp(14px, 3.5vw, 15px);
-  font-family: 'Inter', sans-serif;
+  font-size: max(16px, clamp(14px, 3.5vw, 15px));
+  font-family: 'Outfit', sans-serif;
   color: var(--text);
   background: #fff;
   transition: border-color .2s, box-shadow .2s;
-  -webkit-appearance: none;
-  appearance: none;
-  /* prevent zoom on iOS when font-size < 16px */
-  font-size: max(16px, clamp(14px, 3.5vw, 15px));
+  -webkit-appearance: none; appearance: none;
 }
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 0 3px rgba(232,98,42,.12);
-}
-input.err, select.err, textarea.err {
-  border-color: #E24B4A;
-  box-shadow: 0 0 0 3px rgba(226,75,74,.12);
-}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,98,42,.12); }
+input.err, select.err, textarea.err { border-color: #E24B4A; box-shadow: 0 0 0 3px rgba(226,75,74,.12); }
 textarea { min-height: 90px; resize: vertical; line-height: 1.65; }
 ::placeholder { color: #C0C5CE; }
-
 .selwrap { position: relative; }
-.selwrap::after {
-  content: '';
-  position: absolute;
-  right: 13px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0; height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid var(--gray);
-  pointer-events: none;
-}
+.selwrap::after { content: ''; position: absolute; right: 13px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--gray); pointer-events: none; }
 
-/* ── CHOICE PILLS ── */
+/* Pills */
 .choices { display: flex; flex-wrap: wrap; gap: clamp(6px, 1.5vw, 8px); }
 .ci { display: none; }
 .cl {
-  display: inline-flex;
-  align-items: center;
-  padding: clamp(7px, 2vw, 9px) clamp(12px, 3vw, 16px);
-  border: 1.5px solid var(--line);
-  border-radius: 99px;
-  font-size: clamp(13px, 3.2vw, 14px);
-  color: var(--text);
-  cursor: pointer;
-  transition: .2s;
-  user-select: none;
-  font-weight: 500;
-  background: #fff;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  display: inline-flex; align-items: center;
+  padding: clamp(7px, 2vw, 9px) clamp(12px, 3vw, 15px);
+  border: 1.5px solid var(--line); border-radius: 99px;
+  font-size: clamp(13px, 3.2vw, 14px); color: var(--text);
+  cursor: pointer; transition: .2s; user-select: none; font-weight: 500; background: #fff;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  font-family: 'Outfit', sans-serif;
 }
 .cl:hover { border-color: var(--orange-l); background: var(--orange-p); }
 .ci:checked + .cl { background: var(--orange); border-color: var(--orange); color: #fff; }
 
-/* ── NAVIGATION BUTTONS ── */
-.nav {
-  display: flex;
-  gap: clamp(8px, 2vw, 10px);
-  margin-top: clamp(20px, 5vw, 28px);
-  padding-top: clamp(16px, 4vw, 20px);
-  border-top: 1px solid var(--line);
-}
+/* Nav */
+.nav { display: flex; gap: clamp(8px, 2vw, 10px); margin-top: clamp(20px, 5vw, 28px); padding-top: clamp(16px, 4vw, 20px); border-top: 1px solid var(--line); }
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   padding: clamp(11px, 2.8vw, 13px) clamp(16px, 4vw, 22px);
-  border-radius: var(--rs);
-  font-size: clamp(14px, 3.5vw, 15px);
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: background .2s, transform .1s;
-  border: none;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  min-height: 44px; /* WCAG touch target */
+  border-radius: var(--rs); font-size: clamp(14px, 3.5vw, 15px); font-weight: 600;
+  font-family: 'Outfit', sans-serif; cursor: pointer; transition: .2s; border: none;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; min-height: 44px;
 }
 .bbk { background: var(--mist); color: var(--gray); border: 1.5px solid var(--line); flex-shrink: 0; }
 .bbk:hover { background: var(--line); }
@@ -350,703 +485,606 @@ textarea { min-height: 90px; resize: vertical; line-height: 1.65; }
 .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
 /* ── THANK YOU ── */
-.ty { display: none; text-align: center; padding: clamp(40px, 10vw, 64px) 0 40px; }
-.ty.active { display: block; animation: up .4s ease; }
-.tyicon {
-  width: 68px; height: 68px;
-  margin: 0 auto clamp(16px, 4vw, 22px);
-  border-radius: 50%;
+.ty-screen {
   background: var(--night);
-  display: flex; align-items: center; justify-content: center;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
 }
-.ty h2 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(22px, 5vw, 26px);
-  font-weight: 800;
-  color: var(--night);
-  margin-bottom: 10px;
+.ty-inner {
+  text-align: center;
+  max-width: 420px;
+  animation: fadeUp .6s ease forwards;
 }
-.ty p { color: #5A6478; font-size: clamp(14px, 3.5vw, 15px); line-height: 1.75; max-width: 360px; margin: 0 auto; }
-.tysig { font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--orange); margin-top: 20px; font-weight: 700; }
-
-/* ── TABLET: 2-col pills on wider screens ── */
-@media (min-width: 480px) {
-  .choices { gap: 8px; }
-  .cl { font-size: 14px; }
+.ty-graphic {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 28px;
+  position: relative;
 }
-
-/* ── DESKTOP ── */
-@media (min-width: 768px) {
-  .wg { min-height: 180px; }
-  .sg { min-height: 130px; }
+.ty-graphic svg { width: 100%; height: 100%; }
+.ty-check {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
 }
+.ty-check path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: drawCheck .5s ease forwards .4s; }
+@keyframes drawCheck { to { stroke-dashoffset: 0; } }
+.ty-h2 { font-family: 'Outfit', sans-serif; font-size: clamp(28px, 7vw, 38px); font-weight: 800; color: #fff; margin-bottom: 14px; letter-spacing: -.5px; }
+.ty-h2 span { color: var(--orange); }
+.ty-p { color: rgba(255,255,255,.5); font-size: clamp(14px, 3.5vw, 16px); line-height: 1.75; margin-bottom: 32px; }
+.ty-sig { font-family: 'Outfit', sans-serif; font-size: 15px; color: var(--orange); font-weight: 700; letter-spacing: .05em; }
+.ty-dots { display: flex; gap: 8px; justify-content: center; margin-bottom: 28px; }
+.ty-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); opacity: .3; animation: dotPop .6s ease forwards; }
+.ty-dot:nth-child(1) { animation-delay: .1s; }
+.ty-dot:nth-child(2) { animation-delay: .2s; }
+.ty-dot:nth-child(3) { animation-delay: .3s; }
+@keyframes dotPop { to { opacity: 1; transform: scale(1.3); } }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="logo">Moises <span>Macias</span></div>
-  <div class="stepctr" id="stepctr"></div>
-</div>
-<div class="progwrap"><div class="progfill" id="progfill" style="width:0%"></div></div>
-
-<div class="outer">
-
-<!-- ══════════════════════════════
-     WELCOME SCREEN
-══════════════════════════════ -->
-<div class="welcome-screen" id="welcomeScreen">
-<div class="welcome">
-
-  <svg class="wg" viewBox="0 0 560 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="190" fill="#0D1B2A"/>
-    <g transform="translate(280,190)" stroke="#E8622A" stroke-linecap="round">
-      <line x1="0" y1="0" x2="-260" y2="-175" stroke-width="1.2" opacity=".18"/>
-      <line x1="0" y1="0" x2="-175" y2="-190" stroke-width="1"   opacity=".14"/>
-      <line x1="0" y1="0" x2="-80"  y2="-190" stroke-width=".9"  opacity=".12"/>
-      <line x1="0" y1="0" x2="0"    y2="-190" stroke-width=".9"  opacity=".10"/>
-      <line x1="0" y1="0" x2="80"   y2="-190" stroke-width=".9"  opacity=".12"/>
-      <line x1="0" y1="0" x2="175"  y2="-190" stroke-width="1"   opacity=".14"/>
-      <line x1="0" y1="0" x2="260"  y2="-175" stroke-width="1.2" opacity=".18"/>
-      <line x1="0" y1="0" x2="280"  y2="-115" stroke-width="1.5" opacity=".22"/>
-      <line x1="0" y1="0" x2="-280" y2="-115" stroke-width="1.5" opacity=".22"/>
-      <line x1="0" y1="0" x2="-135" y2="-190" stroke-width="2"   opacity=".55"/>
-      <line x1="0" y1="0" x2="60"   y2="-190" stroke-width="1.8" opacity=".45"/>
-      <line x1="0" y1="0" x2="215"  y2="-155" stroke-width="2.2" opacity=".60"/>
-    </g>
-    <circle cx="280" cy="190" r="6"  fill="#E8622A" opacity=".9"/>
-    <circle cx="280" cy="190" r="14" fill="none" stroke="#E8622A" stroke-width="1"  opacity=".35"/>
-    <circle cx="280" cy="190" r="26" fill="none" stroke="#E8622A" stroke-width=".7" opacity=".18"/>
-    <circle cx="195" cy="124" r="3"   fill="#E8622A" opacity=".6"/>
-    <circle cx="358" cy="92"  r="4"   fill="#E8622A" opacity=".5"/>
-    <circle cx="148" cy="60"  r="2.5" fill="#E8622A" opacity=".4"/>
-    <circle cx="440" cy="108" r="2"   fill="#E8622A" opacity=".35"/>
-    <text x="32" y="68"  font-family="Outfit,sans-serif" font-weight="800" font-size="42" fill="white"   opacity=".95" letter-spacing="-1">Let's build</text>
-    <text x="32" y="114" font-family="Outfit,sans-serif" font-weight="800" font-size="42" fill="#E8622A" opacity=".95" letter-spacing="-1">something great.</text>
-  </svg>
-
-  <h1>Before we create,<br>let me <span>get to know you.</span></h1>
-  <p>This form is my way of understanding your business, your people, and your goals — so every piece of content I make actually works for you. No jargon, no pressure. Just honest answers.</p>
-
-  <div class="wmeta">
-    <div class="mrow">
-      <div class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E8622A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      Around 10–12 minutes
-    </div>
-    <div class="mrow">
-      <div class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E8622A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      Your answers are private — used only by me
-    </div>
-    <div class="mrow">
-      <div class="mic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E8622A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
-      No right or wrong answers — be honest
-    </div>
-  </div>
-
-  <button class="btn-start" onclick="startForm()">
-    I'm ready — let's go
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </button>
-</div>
-</div>
-
-<!-- ══════════════════════════════
-     FORM
-══════════════════════════════ -->
-<div class="form-area" id="formArea">
-<form id="mainForm" action="https://formspree.io/f/xojrlpkl" method="POST" novalidate>
-
-<!-- ── STEP 1: About you ── -->
-<div class="step-card active" id="step-0">
-  <svg class="sg" viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="140" fill="#0D1B2A"/>
-    <circle cx="460" cy="70" r="8"   fill="#E8622A" opacity="1"/>
-    <circle cx="460" cy="70" r="22"  fill="none" stroke="#E8622A" stroke-width="1.8" opacity=".7"/>
-    <circle cx="460" cy="70" r="40"  fill="none" stroke="#E8622A" stroke-width="1.3" opacity=".45"/>
-    <circle cx="460" cy="70" r="62"  fill="none" stroke="#E8622A" stroke-width="1"   opacity=".28"/>
-    <circle cx="460" cy="70" r="88"  fill="none" stroke="#E8622A" stroke-width=".8"  opacity=".16"/>
-    <circle cx="460" cy="70" r="118" fill="none" stroke="#E8622A" stroke-width=".6"  opacity=".09"/>
-    <rect x="36" y="24" width="3" height="92" rx="1.5" fill="#E8622A" opacity=".55"/>
-    <rect x="46" y="40" width="3" height="60" rx="1.5" fill="#E8622A" opacity=".30"/>
-    <rect x="56" y="52" width="3" height="38" rx="1.5" fill="#E8622A" opacity=".18"/>
-    <text x="70" y="62" font-family="Syne,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">About you</text>
-    <text x="70" y="88" font-family="Inter,sans-serif" font-size="13" fill="white" opacity=".38">Step 1 of 7</text>
-  </svg>
-  <div class="sbody">
-    <div class="slabel">Step 1 of 7</div>
-    <div class="stitle">Tell me about yourself</div>
-    <div class="ssub">Basic details so I know who I'm working with and how to reach you.</div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-name">Full name <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
+<!-- ══════════════════════════════════════
+     SCREEN 1: HERO WITH VIDEO
+══════════════════════════════════════ -->
+<div class="screen active" id="heroScreen">
+  <div class="hero">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+      src="https://res.cloudinary.com/digv6w92b/video/upload/v1778482076/Intro_Formulario_ii1mqs.mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-logo">Moises <span>Macias</span> · Digital Content</div>
+      <div class="hero-cta" onclick="showProcess()" role="button" tabindex="0" aria-label="Start the journey">
+        <div class="click-ring">
+          <div class="click-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span>Click</span>
+          </div>
+        </div>
+        <div class="hero-phrase">
+          <strong>Let's create something unforgettable.</strong>
+        </div>
       </div>
-      <div class="tip">Your name as you'd like it to appear publicly — on your bio, captions, or content. If you use a brand or business name, add that too.</div>
-      <input type="text" id="f-name" name="Full name" placeholder="Your full name or business name" required autocomplete="name">
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-email">Email address <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">I'll use this to send you content drafts, plans, and updates. Use one you check regularly.</div>
-      <input type="email" id="f-email" name="Email" placeholder="you@yourdomain.com" required autocomplete="email">
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-phone">Phone number</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Optional, but helpful if we need to connect quickly. WhatsApp works great too.</div>
-      <input type="tel" id="f-phone" name="Phone" placeholder="+1 / +64 / +52 ..." autocomplete="tel">
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-location">City or region where you operate <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Location shapes everything — language, cultural references, competition, and which platforms your audience actually uses.</div>
-      <input type="text" id="f-location" name="Location" placeholder="City, region, or country" required autocomplete="address-level2">
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-industry">Industry <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Knowing your sector helps me understand what content performs well and how to position you competitively.</div>
-      <div class="selwrap">
-        <select id="f-industry" name="Industry" required>
-          <option value="" disabled selected>Select your industry</option>
-          <option>Real estate</option>
-          <option>Health &amp; wellness</option>
-          <option>Food &amp; hospitality</option>
-          <option>Retail &amp; e-commerce</option>
-          <option>Professional services</option>
-          <option>Education &amp; coaching</option>
-          <option>Construction &amp; trades</option>
-          <option>Beauty &amp; lifestyle</option>
-          <option>Tech &amp; startups</option>
-          <option>Creative &amp; arts</option>
-          <option>Finance &amp; insurance</option>
-          <option>Other</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="nav">
-      <button type="button" class="btn bnx" onclick="nextStep(0)">
-        Continue
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
     </div>
   </div>
 </div>
 
-<!-- ── STEP 2: Your business ── -->
-<div class="step-card" id="step-1">
-  <svg class="sg" viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="140" fill="#0D1B2A"/>
-    <rect x="390" y="20"  width="24" height="24" rx="3" fill="#E8622A" opacity=".75"/>
-    <rect x="420" y="20"  width="24" height="24" rx="3" fill="#E8622A" opacity=".55"/>
-    <rect x="450" y="20"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".4"/>
-    <rect x="480" y="20"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1"   opacity=".25"/>
-    <rect x="390" y="50"  width="24" height="24" rx="3" fill="#E8622A" opacity=".55"/>
-    <rect x="420" y="50"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".4"/>
-    <rect x="450" y="50"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1"   opacity=".25"/>
-    <rect x="480" y="50"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width=".8"  opacity=".14"/>
-    <rect x="390" y="80"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".35"/>
-    <rect x="420" y="80"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1"   opacity=".22"/>
-    <rect x="450" y="80"  width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width=".8"  opacity=".14"/>
-    <rect x="390" y="110" width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width=".8"  opacity=".18"/>
-    <rect x="310" y="35"  width="18" height="18" rx="3" fill="none" stroke="#E8622A" stroke-width=".9"  opacity=".3"  transform="rotate(12 319 44)"/>
-    <rect x="340" y="70"  width="14" height="14" rx="2" fill="#E8622A" opacity=".22" transform="rotate(-8 347 77)"/>
-    <rect x="290" y="90"  width="10" height="10" rx="2" fill="none" stroke="#E8622A" stroke-width=".8"  opacity=".2"  transform="rotate(20 295 95)"/>
-    <rect x="350" y="15"  width="8"  height="8"  rx="2" fill="#E8622A" opacity=".18" transform="rotate(6 354 19)"/>
-    <text x="36" y="62" font-family="Syne,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Your business</text>
-    <text x="36" y="88" font-family="Inter,sans-serif" font-size="13" fill="white" opacity=".38">Step 2 of 7</text>
-  </svg>
-  <div class="sbody">
-    <div class="slabel">Step 2 of 7</div>
-    <div class="stitle">Your business</div>
-    <div class="ssub">Help me understand what you offer and why it matters.</div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-biz">What does your business do? <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Describe it simply — as if explaining it to someone at a dinner party. This becomes the foundation of every piece of content we create together.</div>
-      <textarea id="f-biz" name="Business description" placeholder="What you do, who you serve, and what you're known for." required></textarea>
+<!-- ══════════════════════════════════════
+     SCREEN 2: 4-PHASE PROCESS
+══════════════════════════════════════ -->
+<div class="screen" id="processScreen">
+  <div class="process-screen">
+    <div class="process-top">
+      <div class="process-eyebrow">How we work together</div>
+      <h2 class="process-title">Simple. Creative. <span>Yours.</span></h2>
+      <p class="process-sub">Four clear phases — from getting to know you to delivering content that actually works for your brand.</p>
     </div>
 
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-diff">What makes you different from others in your field? <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
+    <div class="phases">
+      <!-- Phase 1 -->
+      <div class="phase" style="animation-delay:.1s">
+        <div class="phase-num">01</div>
+        <svg class="phase-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="8" fill="#E8622A" opacity=".9" class="anim-pulse"/>
+          <circle cx="22" cy="22" r="16" stroke="#E8622A" stroke-width="1" opacity=".4" class="anim-ring"/>
+          <circle cx="22" cy="22" r="21" stroke="#E8622A" stroke-width=".6" opacity=".2" class="anim-ring" style="animation-duration:18s;animation-direction:reverse"/>
+        </svg>
+        <div class="phase-title">Connect</div>
+        <span class="phase-tag">Tell me about you</span>
+        <p class="phase-desc">A short form helps me understand your business, your audience, and your goals — before anything is created.</p>
       </div>
-      <div class="tip">It doesn't have to be dramatic — sometimes it's your background, your approach, or simply who you are. Be honest, not aspirational.</div>
-      <textarea id="f-diff" name="Differentiator" placeholder="What do you offer that others in your space don't — or don't do as well?" required></textarea>
+
+      <!-- Phase 2 -->
+      <div class="phase" style="animation-delay:.2s">
+        <div class="phase-num">02</div>
+        <svg class="phase-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="28" width="6" height="10" rx="2" fill="#E8622A" opacity=".4" class="anim-rise"/>
+          <rect x="16" y="20" width="6" height="18" rx="2" fill="#E8622A" opacity=".65" class="anim-rise" style="animation-delay:.15s"/>
+          <rect x="26" y="12" width="6" height="26" rx="2" fill="#E8622A" opacity=".85" class="anim-rise" style="animation-delay:.3s"/>
+          <rect x="36" y="6"  width="6" height="32" rx="2" fill="#E8622A" class="anim-rise" style="animation-delay:.45s"/>
+        </svg>
+        <div class="phase-title">Create</div>
+        <span class="phase-tag">I bring your vision to life</span>
+        <p class="phase-desc">From social media and reels to logos, print design, and full campaigns — I build what your brand truly needs.</p>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase" style="animation-delay:.3s">
+        <div class="phase-num">03</div>
+        <svg class="phase-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6,22 Q14,10 22,22 Q30,34 38,22" stroke="#E8622A" stroke-width="2" stroke-linecap="round" fill="none" class="anim-wave"/>
+          <path d="M6,28 Q14,18 22,28 Q30,38 38,28" stroke="#E8622A" stroke-width="1" stroke-linecap="round" fill="none" opacity=".35" class="anim-wave" style="animation-delay:.5s"/>
+          <circle cx="22" cy="22" r="3.5" fill="#E8622A" class="anim-pulse"/>
+        </svg>
+        <div class="phase-title">Refine</div>
+        <span class="phase-tag">We align together</span>
+        <p class="phase-desc">You review everything, share your feedback, and we fine-tune until it feels exactly right for your brand.</p>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="phase" style="animation-delay:.4s">
+        <div class="phase-num">04</div>
+        <svg class="phase-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="38,22 12,10 16,22" fill="none" stroke="#E8622A" stroke-width="1.5" stroke-linejoin="round" opacity=".9"/>
+          <polygon points="38,22 12,34 16,22" fill="none" stroke="#E8622A" stroke-width="1.5" stroke-linejoin="round" opacity=".6"/>
+          <circle cx="38" cy="22" r="4" fill="#E8622A" class="anim-pulse"/>
+          <circle cx="8"  cy="22" r="2.5" fill="#E8622A" opacity=".5" class="anim-trail"/>
+          <circle cx="3"  cy="22" r="1.5" fill="#E8622A" opacity=".25" class="anim-trail" style="animation-delay:.3s"/>
+        </svg>
+        <div class="phase-title">Deliver</div>
+        <span class="phase-tag">Yours, ready to launch</span>
+        <p class="phase-desc">Final files delivered — organised and ready for whatever comes next. Digital, print, or both.</p>
+      </div>
     </div>
 
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-existing">Do you have an existing website or social accounts?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
+    <button class="process-btn" onclick="showForm()">
+      Fill out the form — it takes 10 minutes
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 3: FORM
+══════════════════════════════════════ -->
+<div class="screen" id="formScreen">
+  <div class="form-screen">
+    <div class="topbar">
+      <div class="logo">Moises <span>Macias</span></div>
+      <div class="stepctr" id="stepctr"></div>
+    </div>
+    <div class="progwrap"><div class="progfill" id="progfill" style="width:0%"></div></div>
+
+    <div class="outer">
+    <form id="mainForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+
+    <!-- STEP 1 -->
+    <div class="step-card active" id="step-0">
+      <div class="sg-wrap">
+        <svg viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="140" fill="#0A0A0A"/>
+          <circle cx="460" cy="70" r="8"   fill="#E8622A" class="anim-pulse"/>
+          <circle cx="460" cy="70" r="28"  fill="none" stroke="#E8622A" stroke-width="1.5" opacity=".55" class="anim-ring"/>
+          <circle cx="460" cy="70" r="50"  fill="none" stroke="#E8622A" stroke-width="1"   opacity=".3"  class="anim-ring" style="animation-duration:16s;animation-direction:reverse"/>
+          <circle cx="460" cy="70" r="76"  fill="none" stroke="#E8622A" stroke-width=".7"  opacity=".18" class="anim-ring" style="animation-duration:22s"/>
+          <circle cx="460" cy="70" r="106" fill="none" stroke="#E8622A" stroke-width=".5"  opacity=".1"  class="anim-ring" style="animation-duration:30s;animation-direction:reverse"/>
+          <rect x="36" y="24" width="3" height="92" rx="1.5" fill="#E8622A" opacity=".55"/>
+          <rect x="46" y="40" width="3" height="60" rx="1.5" fill="#E8622A" opacity=".30"/>
+          <rect x="56" y="52" width="3" height="38" rx="1.5" fill="#E8622A" opacity=".18"/>
+          <text x="70" y="62" font-family="Outfit,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">About you</text>
+          <text x="70" y="88" font-family="Outfit,sans-serif" font-size="13" fill="white" opacity=".38">Step 1 of 7</text>
+        </svg>
       </div>
-      <div class="tip">Share any handles or URLs so I can see what already exists and know what to build from — or avoid repeating.</div>
-      <input type="text" id="f-existing" name="Existing presence" placeholder="Website URL, @handles, or 'starting from scratch'">
+      <div class="sbody">
+        <div class="slabel">Step 1 of 7</div>
+        <div class="stitle">Tell me about yourself</div>
+        <div class="ssub">Basic details so I know who I'm working with and how to reach you.</div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-name">Full name <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Your name as you'd like it to appear publicly. If you use a brand or business name, add that too.</div>
+          <input type="text" id="f-name" name="Full name" placeholder="Your full name or business name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-email">Email address <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">I'll use this to send you content drafts, plans, and updates. Use one you check regularly.</div>
+          <input type="email" id="f-email" name="Email" placeholder="you@yourdomain.com" required autocomplete="email">
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-phone">Phone number</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Optional, but helpful if we need to connect quickly. WhatsApp works great too.</div>
+          <input type="tel" id="f-phone" name="Phone" placeholder="+1 / +64 / +52 ..." autocomplete="tel">
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-location">City or region where you operate <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Location shapes everything — language, cultural references, competition, and which platforms your audience uses.</div>
+          <input type="text" id="f-location" name="Location" placeholder="City, region, or country" required>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-industry">Industry <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Knowing your sector helps me understand what content performs and how to position you.</div>
+          <div class="selwrap"><select id="f-industry" name="Industry" required>
+            <option value="" disabled selected>Select your industry</option>
+            <option>Real estate</option><option>Health &amp; wellness</option><option>Food &amp; hospitality</option>
+            <option>Retail &amp; e-commerce</option><option>Professional services</option><option>Education &amp; coaching</option>
+            <option>Construction &amp; trades</option><option>Beauty &amp; lifestyle</option><option>Tech &amp; startups</option>
+            <option>Creative &amp; arts</option><option>Finance &amp; insurance</option><option>Other</option>
+          </select></div>
+        </div>
+        <div class="nav">
+          <button type="button" class="btn bnx" onclick="nextStep(0)">Continue <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
     </div>
 
-    <div class="nav">
-      <button type="button" class="btn bbk" onclick="prevStep(1)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <button type="button" class="btn bnx" onclick="nextStep(1)">
-        Continue
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+    <!-- STEP 2 -->
+    <div class="step-card" id="step-1">
+      <div class="sg-wrap">
+        <svg viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="140" fill="#0A0A0A"/>
+          <rect x="390" y="20" width="24" height="24" rx="3" fill="#E8622A" opacity=".75" class="anim-pulse"/>
+          <rect x="420" y="20" width="24" height="24" rx="3" fill="#E8622A" opacity=".5"  class="anim-pulse" style="animation-delay:.3s"/>
+          <rect x="450" y="20" width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".4" class="anim-pulse" style="animation-delay:.6s"/>
+          <rect x="480" y="20" width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1"   opacity=".25"/>
+          <rect x="390" y="50" width="24" height="24" rx="3" fill="#E8622A" opacity=".5"  class="anim-pulse" style="animation-delay:.2s"/>
+          <rect x="420" y="50" width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".4"/>
+          <rect x="450" y="50" width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1"   opacity=".22"/>
+          <rect x="390" y="80" width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".3" class="anim-pulse" style="animation-delay:.4s"/>
+          <rect x="420" y="80" width="24" height="24" rx="3" fill="none" stroke="#E8622A" stroke-width="1"   opacity=".18"/>
+          <rect x="310" y="35" width="18" height="18" rx="3" fill="none" stroke="#E8622A" stroke-width=".9"  opacity=".3" transform="rotate(12 319 44)" class="anim-spin" style="transform-origin:319px 44px"/>
+          <rect x="340" y="70" width="14" height="14" rx="2" fill="#E8622A" opacity=".2" transform="rotate(-8 347 77)" class="anim-spin" style="transform-origin:347px 77px;animation-direction:reverse"/>
+          <text x="36" y="62" font-family="Outfit,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Your business</text>
+          <text x="36" y="88" font-family="Outfit,sans-serif" font-size="13" fill="white" opacity=".38">Step 2 of 7</text>
+        </svg>
+      </div>
+      <div class="sbody">
+        <div class="slabel">Step 2 of 7</div>
+        <div class="stitle">Your business</div>
+        <div class="ssub">Help me understand what you offer and why it matters.</div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-biz">What does your business do? <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Describe it simply — as if explaining it to someone at a dinner party. This becomes the foundation of every piece of content we create.</div>
+          <textarea id="f-biz" name="Business description" placeholder="What you do, who you serve, and what you're known for." required></textarea>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-diff">What makes you different from others in your field? <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">It doesn't have to be dramatic — sometimes it's your background, your approach, or simply who you are. Be honest, not aspirational.</div>
+          <textarea id="f-diff" name="Differentiator" placeholder="What do you offer that others in your space don't — or don't do as well?" required></textarea>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-existing">Do you have an existing website or social accounts?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Share any handles or URLs so I can see what already exists and know what to build from.</div>
+          <input type="text" id="f-existing" name="Existing presence" placeholder="Website URL, @handles, or 'starting from scratch'">
+        </div>
+        <div class="nav">
+          <button type="button" class="btn bbk" onclick="prevStep(1)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+          <button type="button" class="btn bnx" onclick="nextStep(1)">Continue <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-card" id="step-2">
+      <div class="sg-wrap">
+        <svg viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="140" fill="#0A0A0A"/>
+          <g stroke="#E8622A" stroke-width=".9" opacity=".35" fill="none" class="anim-dash">
+            <line x1="380" y1="40" x2="430" y2="75"/><line x1="430" y1="75" x2="480" y2="50"/>
+            <line x1="480" y1="50" x2="510" y2="90"/><line x1="430" y1="75" x2="410" y2="115"/>
+            <line x1="380" y1="40" x2="340" y2="70"/><line x1="340" y1="70" x2="360" y2="115"/>
+            <line x1="480" y1="50" x2="520" y2="30"/><line x1="410" y1="115" x2="360" y2="115"/>
+          </g>
+          <circle cx="380" cy="40"  r="3.5" fill="#E8622A" opacity=".5"  class="anim-float" style="animation-delay:.1s"/>
+          <circle cx="480" cy="50"  r="3.5" fill="#E8622A" opacity=".5"  class="anim-float" style="animation-delay:.4s"/>
+          <circle cx="510" cy="90"  r="3"   fill="#E8622A" opacity=".4"  class="anim-float" style="animation-delay:.7s"/>
+          <circle cx="340" cy="70"  r="3"   fill="#E8622A" opacity=".4"  class="anim-float" style="animation-delay:.2s"/>
+          <circle cx="360" cy="115" r="3"   fill="#E8622A" opacity=".35" class="anim-float" style="animation-delay:.5s"/>
+          <circle cx="410" cy="115" r="3"   fill="#E8622A" opacity=".35" class="anim-float" style="animation-delay:.8s"/>
+          <circle cx="520" cy="30"  r="2.5" fill="#E8622A" opacity=".3"  class="anim-float" style="animation-delay:.3s"/>
+          <circle cx="430" cy="75"  r="9"   fill="#E8622A" opacity="1"   class="anim-pulse"/>
+          <circle cx="430" cy="75"  r="18"  fill="none" stroke="#E8622A" stroke-width="1" opacity=".35" class="anim-ring"/>
+          <circle cx="430" cy="75"  r="3"   fill="white" opacity=".9"/>
+          <text x="36" y="62" font-family="Outfit,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Your ideal client</text>
+          <text x="36" y="88" font-family="Outfit,sans-serif" font-size="13" fill="white" opacity=".38">Step 3 of 7</text>
+        </svg>
+      </div>
+      <div class="sbody">
+        <div class="slabel">Step 3 of 7</div>
+        <div class="stitle">Your ideal client</div>
+        <div class="ssub">If you speak to everyone, you speak to no one. Let's define exactly who you're talking to.</div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-client">Describe your ideal client or customer <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Think about the person you most enjoy working with. The more specific you are, the better the content will speak to them.</div>
+          <textarea id="f-client" name="Ideal client" placeholder="Who are they? Their situation, age range, lifestyle, what they value." required></textarea>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-pain">What is the biggest problem they come to you with? <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">When we know what pain you solve, we write content that makes your ideal client feel seen — and want to reach out.</div>
+          <textarea id="f-pain" name="Client pain" placeholder="What are they struggling with or confused by before they find you?" required></textarea>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-outcomes">What do your best clients say after working with you?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Real testimonials or imagined outcomes — both work. What transformation do you deliver?</div>
+          <textarea id="f-outcomes" name="Client outcomes" placeholder="What result or feeling do they leave with?"></textarea>
+        </div>
+        <div class="nav">
+          <button type="button" class="btn bbk" onclick="prevStep(2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+          <button type="button" class="btn bnx" onclick="nextStep(2)">Continue <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-card" id="step-3">
+      <div class="sg-wrap">
+        <svg viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="140" fill="#0A0A0A"/>
+          <path d="M280,70 Q288,43 296,70 Q304,97 312,55 Q320,22 330,75 Q340,112 350,48 Q360,15 370,68" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".25" stroke-linecap="round" class="anim-wave"/>
+          <path d="M370,68 Q382,24 394,68 Q406,112 418,68 Q430,24 442,68 Q454,112 466,68 Q478,24 490,68 Q502,112 514,68 Q526,24 538,68" fill="none" stroke="#E8622A" stroke-width="2" opacity=".7" stroke-linecap="round" class="anim-wave" style="animation-delay:.5s"/>
+          <circle cx="538" cy="68" r="6"  fill="#E8622A" class="anim-pulse"/>
+          <circle cx="538" cy="68" r="13" fill="none" stroke="#E8622A" stroke-width=".8" opacity=".3" class="anim-ring"/>
+          <line x1="280" y1="70" x2="540" y2="70" stroke="white" stroke-width=".5" opacity=".05"/>
+          <text x="36" y="62" font-family="Outfit,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Brand &amp; tone</text>
+          <text x="36" y="88" font-family="Outfit,sans-serif" font-size="13" fill="white" opacity=".38">Step 4 of 7</text>
+        </svg>
+      </div>
+      <div class="sbody">
+        <div class="slabel">Step 4 of 7</div>
+        <div class="stitle">Brand &amp; tone</div>
+        <div class="ssub">How do you want to sound online? Be honest — authenticity is what people connect with.</div>
+        <div class="field">
+          <div class="fh"><label class="flabel">Which style feels most like you? <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">The way you actually speak with clients, not how you think you should sound.</div>
+          <div class="choices">
+            <input class="ci" type="radio" name="Tone" id="t1" value="Warm and friendly" required><label class="cl" for="t1">Warm &amp; friendly</label>
+            <input class="ci" type="radio" name="Tone" id="t2" value="Professional"><label class="cl" for="t2">Professional</label>
+            <input class="ci" type="radio" name="Tone" id="t3" value="Calm and reassuring"><label class="cl" for="t3">Calm &amp; reassuring</label>
+            <input class="ci" type="radio" name="Tone" id="t4" value="Bold and energetic"><label class="cl" for="t4">Bold &amp; energetic</label>
+            <input class="ci" type="radio" name="Tone" id="t5" value="Witty and creative"><label class="cl" for="t5">Witty &amp; creative</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-tonenotes">Anything to add about your tone?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Maybe "professional" but still with humour, or "bold" but never aggressive. Add nuance here.</div>
+          <input type="text" id="f-tonenotes" name="Tone notes" placeholder="e.g. Professional but approachable — I still like to keep things light">
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-brandwords">3 words that describe your brand</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">A creative filter — when deciding if a post fits, we check it against these 3 words. Keep them honest, not aspirational.</div>
+          <input type="text" id="f-brandwords" name="Brand words" placeholder="e.g. Reliable · Human · Unconventional">
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-limits">What do you absolutely not want on your social media? <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Every brand has limits. Knowing yours means I'll never produce something that makes you uncomfortable.</div>
+          <textarea id="f-limits" name="Content limits" placeholder="Topics, formats, or styles that don't fit your brand or values." required></textarea>
+        </div>
+        <div class="nav">
+          <button type="button" class="btn bbk" onclick="prevStep(3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+          <button type="button" class="btn bnx" onclick="nextStep(3)">Continue <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-card" id="step-4">
+      <div class="sg-wrap">
+        <svg viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="140" fill="#0A0A0A"/>
+          <polygon points="420,15 500,130 340,130" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".5" class="anim-pulse"/>
+          <polygon points="445,25 510,120 380,120" fill="#E8622A" opacity=".07" class="anim-pulse" style="animation-delay:.5s"/>
+          <polygon points="395,30 495,140 295,140" fill="none" stroke="#E8622A" stroke-width=".8" opacity=".22" class="anim-pulse" style="animation-delay:1s"/>
+          <rect x="400" y="45" width="80" height="80" rx="3" fill="none" stroke="#E8622A" stroke-width="1" opacity=".3" class="anim-spin" style="transform-origin:440px 85px"/>
+          <circle cx="420" cy="75" r="5" fill="#E8622A" class="anim-pulse"/>
+          <rect x="310" y="30" width="40" height="8" rx="4" fill="#E8622A" opacity=".6"/>
+          <rect x="310" y="46" width="28" height="8" rx="4" fill="#E8622A" opacity=".35"/>
+          <rect x="310" y="62" width="34" height="8" rx="4" fill="#E8622A" opacity=".2"/>
+          <text x="36" y="62" font-family="Outfit,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Visual identity</text>
+          <text x="36" y="88" font-family="Outfit,sans-serif" font-size="13" fill="white" opacity=".38">Step 5 of 7</text>
+        </svg>
+      </div>
+      <div class="sbody">
+        <div class="slabel">Step 5 of 7</div>
+        <div class="stitle">Visual identity</div>
+        <div class="ssub">Even if you don't have a full brand yet, your answers give me a starting point for the visual direction.</div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-assets">Do you have a logo, brand colours, or existing visual style?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Share what exists: a logo file, colour codes, a font you love, or a mood you're going for. Nothing is too small.</div>
+          <div class="selwrap"><select id="f-assets" name="Visual assets">
+            <option value="" disabled selected>Select one</option>
+            <option>Yes — logo, colours, and fonts all defined</option>
+            <option>Partially — some elements but not a full system</option>
+            <option>No — starting from scratch</option>
+            <option>Not sure — I'll share what I have</option>
+          </select></div>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel">What visual feeling do you want to convey?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Pick as many as apply — these become design filters for every graphic and layout we create together.</div>
+          <div class="choices">
+            <input class="ci" type="checkbox" name="Visual mood" id="vm1" value="Clean and minimal"><label class="cl" for="vm1">Clean &amp; minimal</label>
+            <input class="ci" type="checkbox" name="Visual mood" id="vm2" value="Bold and colourful"><label class="cl" for="vm2">Bold &amp; colourful</label>
+            <input class="ci" type="checkbox" name="Visual mood" id="vm3" value="Warm and natural"><label class="cl" for="vm3">Warm &amp; natural</label>
+            <input class="ci" type="checkbox" name="Visual mood" id="vm4" value="Sleek and corporate"><label class="cl" for="vm4">Sleek &amp; corporate</label>
+            <input class="ci" type="checkbox" name="Visual mood" id="vm5" value="Playful and creative"><label class="cl" for="vm5">Playful &amp; creative</label>
+            <input class="ci" type="checkbox" name="Visual mood" id="vm6" value="Elegant and refined"><label class="cl" for="vm6">Elegant &amp; refined</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-visref">Any brands or accounts whose visual style you admire?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">These don't need to be in your industry. Visual references speak louder than descriptions.</div>
+          <input type="text" id="f-visref" name="Visual references" placeholder="@handles, brand names, or website URLs">
+        </div>
+        <div class="nav">
+          <button type="button" class="btn bbk" onclick="prevStep(4)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+          <button type="button" class="btn bnx" onclick="nextStep(4)">Continue <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step-card" id="step-5">
+      <div class="sg-wrap">
+        <svg viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="140" fill="#0A0A0A"/>
+          <rect x="340" y="90"  width="22" height="40"  rx="3" fill="#E8622A" opacity=".2"  class="anim-rise"/>
+          <rect x="370" y="70"  width="22" height="60"  rx="3" fill="#E8622A" opacity=".38" class="anim-rise" style="animation-delay:.15s"/>
+          <rect x="400" y="50"  width="22" height="80"  rx="3" fill="#E8622A" opacity=".58" class="anim-rise" style="animation-delay:.3s"/>
+          <rect x="430" y="30"  width="22" height="100" rx="3" fill="#E8622A" opacity=".8"  class="anim-rise" style="animation-delay:.45s"/>
+          <rect x="460" y="12"  width="22" height="118" rx="3" fill="#E8622A" opacity=".95" class="anim-rise" style="animation-delay:.6s"/>
+          <circle cx="471" cy="9" r="5" fill="white" opacity=".9" class="anim-pulse"/>
+          <line x1="330" y1="130" x2="495" y2="130" stroke="white" stroke-width=".8" opacity=".1"/>
+          <text x="36" y="62" font-family="Outfit,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Goals &amp; platforms</text>
+          <text x="36" y="88" font-family="Outfit,sans-serif" font-size="13" fill="white" opacity=".38">Step 6 of 7</text>
+        </svg>
+      </div>
+      <div class="sbody">
+        <div class="slabel">Step 6 of 7</div>
+        <div class="stitle">Goals &amp; platforms</div>
+        <div class="ssub">What do you want content to do for your business — and what do you need most right now?</div>
+        <div class="field">
+          <div class="fh"><label class="flabel">What is your main goal right now? <span class="req">*</span></label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">This shapes the entire content strategy. Awareness content looks very different from lead-generation content.</div>
+          <div class="choices">
+            <input class="ci" type="radio" name="Main goal" id="g1" value="Get more clients or enquiries" required><label class="cl" for="g1">Get clients / enquiries</label>
+            <input class="ci" type="radio" name="Main goal" id="g2" value="Build brand awareness"><label class="cl" for="g2">Build awareness</label>
+            <input class="ci" type="radio" name="Main goal" id="g3" value="Educate my audience"><label class="cl" for="g3">Educate my audience</label>
+            <input class="ci" type="radio" name="Main goal" id="g4" value="Grow a community"><label class="cl" for="g4">Grow a community</label>
+            <input class="ci" type="radio" name="Main goal" id="g5" value="Drive traffic to my website"><label class="cl" for="g5">Drive website traffic</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel">What do you need most right now?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Select all that apply — this helps me understand what kind of project we're starting and what package might suit you best.</div>
+          <div class="choices">
+            <input class="ci" type="checkbox" name="Service needed" id="sn1" value="Social media content"><label class="cl" for="sn1">Social media content</label>
+            <input class="ci" type="checkbox" name="Service needed" id="sn2" value="Logo and brand identity"><label class="cl" for="sn2">Logo &amp; brand identity</label>
+            <input class="ci" type="checkbox" name="Service needed" id="sn3" value="Print design"><label class="cl" for="sn3">Print design</label>
+            <input class="ci" type="checkbox" name="Service needed" id="sn4" value="Video and reels"><label class="cl" for="sn4">Video &amp; reels</label>
+            <input class="ci" type="checkbox" name="Service needed" id="sn5" value="A full campaign"><label class="cl" for="sn5">A full campaign</label>
+            <input class="ci" type="checkbox" name="Service needed" id="sn6" value="Not sure — I need guidance"><label class="cl" for="sn6">Not sure — I need guidance</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel">Which platforms are you on — or want to be?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">I'll tailor the strategy to what you're actually using — not what sounds impressive.</div>
+          <div class="choices">
+            <input class="ci" type="checkbox" name="Platforms" id="p1" value="Instagram"><label class="cl" for="p1">Instagram</label>
+            <input class="ci" type="checkbox" name="Platforms" id="p2" value="Facebook"><label class="cl" for="p2">Facebook</label>
+            <input class="ci" type="checkbox" name="Platforms" id="p3" value="LinkedIn"><label class="cl" for="p3">LinkedIn</label>
+            <input class="ci" type="checkbox" name="Platforms" id="p4" value="TikTok"><label class="cl" for="p4">TikTok</label>
+            <input class="ci" type="checkbox" name="Platforms" id="p5" value="YouTube"><label class="cl" for="p5">YouTube</label>
+            <input class="ci" type="checkbox" name="Platforms" id="p6" value="Not sure yet"><label class="cl" for="p6">Not sure yet</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-budget">Do you have a budget for paid ads?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Not a commitment — just helps me understand if we're working organic-only or if there's room to amplify with paid promotion.</div>
+          <div class="selwrap"><select id="f-budget" name="Ads budget">
+            <option value="" disabled selected>Select an option</option>
+            <option>No budget for ads right now</option>
+            <option>Under $200/month</option><option>$200–$500/month</option>
+            <option>$500–$1,000/month</option><option>Over $1,000/month</option>
+            <option>Not sure yet</option>
+          </select></div>
+        </div>
+        <div class="nav">
+          <button type="button" class="btn bbk" onclick="prevStep(5)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+          <button type="button" class="btn bnx" onclick="nextStep(5)">Continue <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="step-card" id="step-6">
+      <div class="sg-wrap">
+        <svg viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="140" fill="#0A0A0A"/>
+          <polygon points="500,70 370,35 390,70" fill="none" stroke="#E8622A" stroke-width="1.5" opacity=".85" stroke-linejoin="round" class="anim-pulse"/>
+          <polygon points="500,70 370,105 390,70" fill="none" stroke="#E8622A" stroke-width="1.5" opacity=".55" stroke-linejoin="round" class="anim-pulse" style="animation-delay:.4s"/>
+          <polygon points="390,70 370,35 370,105" fill="#E8622A" opacity=".1"/>
+          <line x1="390" y1="70" x2="500" y2="70" stroke="#E8622A" stroke-width=".8" opacity=".3"/>
+          <circle cx="330" cy="70" r="3"   fill="#E8622A" opacity=".5"  class="anim-trail"/>
+          <circle cx="310" cy="70" r="2.2" fill="#E8622A" opacity=".32" class="anim-trail" style="animation-delay:.3s"/>
+          <circle cx="293" cy="70" r="1.6" fill="#E8622A" opacity=".2"  class="anim-trail" style="animation-delay:.6s"/>
+          <circle cx="279" cy="70" r="1.2" fill="#E8622A" opacity=".12" class="anim-trail" style="animation-delay:.9s"/>
+          <circle cx="500" cy="70" r="5"   fill="#E8622A" class="anim-pulse"/>
+          <text x="36" y="62" font-family="Outfit,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Almost there</text>
+          <text x="36" y="88" font-family="Outfit,sans-serif" font-size="13" fill="white" opacity=".38">Step 7 of 7</text>
+        </svg>
+      </div>
+      <div class="sbody">
+        <div class="slabel">Step 7 of 7</div>
+        <div class="stitle">Last few things</div>
+        <div class="ssub">Almost done — these final questions help me see the full picture before we start.</div>
+        <div class="field">
+          <div class="fh"><label class="flabel">Are you comfortable appearing in video content?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">Video is one of the highest-performing formats right now. Knowing your comfort level helps me design a strategy that works for you.</div>
+          <div class="choices">
+            <input class="ci" type="radio" name="Video" id="vc1" value="Yes, comfortable on camera"><label class="cl" for="vc1">Yes, comfortable</label>
+            <input class="ci" type="radio" name="Video" id="vc2" value="Yes, but I need to prepare"><label class="cl" for="vc2">Yes, with prep</label>
+            <input class="ci" type="radio" name="Video" id="vc3" value="Behind the scenes only"><label class="cl" for="vc3">Behind the scenes only</label>
+            <input class="ci" type="radio" name="Video" id="vc4" value="Prefer not to appear on video"><label class="cl" for="vc4">Prefer not to</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="fh"><label class="flabel" for="f-notes">Anything else on your mind?</label><button type="button" class="ibtn" onclick="toggleTip(this)"><svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg></button></div>
+          <div class="tip">A launch date, a past marketing experience that didn't work, something specific coming up. No detail is wasted.</div>
+          <textarea id="f-notes" name="Extra notes" placeholder="Anything else on your mind"></textarea>
+        </div>
+        <div class="nav">
+          <button type="button" class="btn bbk" onclick="prevStep(6)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+          <button type="submit" class="btn bsb" id="submitBtn">Send it over <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    </form>
     </div>
   </div>
 </div>
 
-<!-- ── STEP 3: Ideal client ── -->
-<div class="step-card" id="step-2">
-  <svg class="sg" viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="140" fill="#0D1B2A"/>
-    <g stroke="#E8622A" stroke-width=".9" opacity=".35" fill="none">
-      <line x1="380" y1="40"  x2="430" y2="75"/>
-      <line x1="430" y1="75"  x2="480" y2="50"/>
-      <line x1="480" y1="50"  x2="510" y2="90"/>
-      <line x1="430" y1="75"  x2="410" y2="115"/>
-      <line x1="380" y1="40"  x2="340" y2="70"/>
-      <line x1="340" y1="70"  x2="360" y2="115"/>
-      <line x1="480" y1="50"  x2="520" y2="30"/>
-      <line x1="410" y1="115" x2="360" y2="115"/>
-    </g>
-    <circle cx="380" cy="40"  r="3.5" fill="#E8622A" opacity=".5"/>
-    <circle cx="480" cy="50"  r="3.5" fill="#E8622A" opacity=".5"/>
-    <circle cx="510" cy="90"  r="3"   fill="#E8622A" opacity=".4"/>
-    <circle cx="340" cy="70"  r="3"   fill="#E8622A" opacity=".4"/>
-    <circle cx="360" cy="115" r="3"   fill="#E8622A" opacity=".35"/>
-    <circle cx="410" cy="115" r="3"   fill="#E8622A" opacity=".35"/>
-    <circle cx="520" cy="30"  r="2.5" fill="#E8622A" opacity=".3"/>
-    <circle cx="430" cy="75"  r="9"   fill="#E8622A" opacity="1"/>
-    <circle cx="430" cy="75"  r="18"  fill="none" stroke="#E8622A" stroke-width="1" opacity=".35"/>
-    <circle cx="430" cy="75"  r="3"   fill="white" opacity=".9"/>
-    <text x="36" y="62" font-family="Syne,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Your ideal client</text>
-    <text x="36" y="88" font-family="Inter,sans-serif" font-size="13" fill="white" opacity=".38">Step 3 of 7</text>
-  </svg>
-  <div class="sbody">
-    <div class="slabel">Step 3 of 7</div>
-    <div class="stitle">Your ideal client</div>
-    <div class="ssub">If you speak to everyone, you speak to no one. Let's define exactly who you're talking to.</div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-client">Describe your ideal client or customer <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
+<!-- ══════════════════════════════════════
+     SCREEN 4: THANK YOU
+══════════════════════════════════════ -->
+<div class="screen" id="tyScreen">
+  <div class="ty-screen">
+    <div class="ty-inner">
+      <div class="ty-graphic">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" stroke="#E8622A" stroke-width="1.5" opacity=".3" class="anim-ring"/>
+          <circle cx="50" cy="50" r="38" stroke="#E8622A" stroke-width="1" opacity=".2" class="anim-ring" style="animation-duration:18s;animation-direction:reverse"/>
+          <circle cx="50" cy="50" r="28" fill="#E8622A" opacity=".12"/>
+          <circle cx="50" cy="50" r="20" fill="#E8622A" opacity=".9" class="anim-pulse"/>
+        </svg>
+        <div class="ty-check">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+            <path class="ty-check-path" d="M5 12l5 5L20 7"/>
+          </svg>
+        </div>
       </div>
-      <div class="tip">Think about the person you most enjoy working with — their situation, values, what they care about. The more specific you are, the better the content will speak directly to them.</div>
-      <textarea id="f-client" name="Ideal client" placeholder="Who are they? Their situation, age range, lifestyle, what they value." required></textarea>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-pain">What is the biggest problem they come to you with? <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
+      <div class="ty-dots">
+        <div class="ty-dot"></div>
+        <div class="ty-dot"></div>
+        <div class="ty-dot"></div>
       </div>
-      <div class="tip">This is the heart of your value. When we know what pain you solve, we write content that makes your ideal client feel seen — and want to reach out.</div>
-      <textarea id="f-pain" name="Client pain" placeholder="What are they struggling with, worried about, or confused by before they find you?" required></textarea>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-outcomes">What do your best clients say after working with you?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Real testimonials or imagined outcomes — both work. This tells me what transformation you deliver, which is powerful content material.</div>
-      <textarea id="f-outcomes" name="Client outcomes" placeholder="What result or feeling do they leave with? What do they tell others about you?"></textarea>
-    </div>
-
-    <div class="nav">
-      <button type="button" class="btn bbk" onclick="prevStep(2)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <button type="button" class="btn bnx" onclick="nextStep(2)">
-        Continue
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
+      <h2 class="ty-h2">We're in this <span>together.</span></h2>
+      <p class="ty-p">Your information is on its way. I'll review everything carefully and get back to you within 48 hours with a tailored proposal. This is just the beginning.</p>
+      <div class="ty-sig">— Moises Macias · Digital Content</div>
     </div>
   </div>
 </div>
-
-<!-- ── STEP 4: Brand & tone ── -->
-<div class="step-card" id="step-3">
-  <svg class="sg" viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="140" fill="#0D1B2A"/>
-    <path d="M280,70 Q288,43 296,70 Q304,97 308,55 Q312,25 318,75 Q324,110 330,50 Q336,15 344,73 Q350,113 358,45 Q364,13 370,68" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".25" stroke-linecap="round"/>
-    <path d="M370,68 Q382,24 394,68 Q406,112 418,68 Q430,24 442,68 Q454,112 466,68 Q478,24 490,68 Q502,112 514,68 Q526,24 538,68" fill="none" stroke="#E8622A" stroke-width="1.8" opacity=".65" stroke-linecap="round"/>
-    <circle cx="538" cy="68" r="5"  fill="#E8622A" opacity=".95"/>
-    <circle cx="538" cy="68" r="11" fill="none" stroke="#E8622A" stroke-width=".8" opacity=".3"/>
-    <line x1="280" y1="70" x2="540" y2="70" stroke="white" stroke-width=".5" opacity=".06"/>
-    <text x="36" y="62" font-family="Syne,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Brand &amp; tone</text>
-    <text x="36" y="88" font-family="Inter,sans-serif" font-size="13" fill="white" opacity=".38">Step 4 of 7</text>
-  </svg>
-  <div class="sbody">
-    <div class="slabel">Step 4 of 7</div>
-    <div class="stitle">Brand &amp; tone</div>
-    <div class="ssub">How do you want to sound online? Be honest about how you naturally communicate — that's what people connect with.</div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel">Which communication style feels most like you? <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Pick the one that feels most natural — the way you actually speak with clients, not how you think you should sound.</div>
-      <div class="choices" role="group" aria-label="Communication style">
-        <input class="ci" type="radio" name="Tone" id="t1" value="Warm and friendly" required><label class="cl" for="t1">Warm &amp; friendly</label>
-        <input class="ci" type="radio" name="Tone" id="t2" value="Professional and informative"><label class="cl" for="t2">Professional</label>
-        <input class="ci" type="radio" name="Tone" id="t3" value="Calm and reassuring"><label class="cl" for="t3">Calm &amp; reassuring</label>
-        <input class="ci" type="radio" name="Tone" id="t4" value="Bold and energetic"><label class="cl" for="t4">Bold &amp; energetic</label>
-        <input class="ci" type="radio" name="Tone" id="t5" value="Witty and creative"><label class="cl" for="t5">Witty &amp; creative</label>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-tonenotes">Anything to add about your tone?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Maybe you're "professional" but still want humour, or "bold" but never aggressive. Add nuance to your selection above.</div>
-      <input type="text" id="f-tonenotes" name="Tone notes" placeholder="e.g. Professional but approachable — I still like to keep things light">
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-brandwords">3 words that describe your brand</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">These become a creative filter — when we're deciding if a post fits your brand, we check it against these 3 words. Keep them honest, not aspirational.</div>
-      <input type="text" id="f-brandwords" name="Brand words" placeholder="e.g. Reliable · Human · Unconventional">
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-limits">What do you absolutely not want on your social media? <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Every brand has limits. Knowing yours means I'll never produce something that makes you uncomfortable or goes against your values.</div>
-      <textarea id="f-limits" name="Content limits" placeholder="Topics, formats, or styles that don't fit your brand or values." required></textarea>
-    </div>
-
-    <div class="nav">
-      <button type="button" class="btn bbk" onclick="prevStep(3)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <button type="button" class="btn bnx" onclick="nextStep(3)">
-        Continue
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ── STEP 5: Visual identity ── -->
-<div class="step-card" id="step-4">
-  <svg class="sg" viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="140" fill="#0D1B2A"/>
-    <polygon points="420,15 500,130 340,130" fill="none" stroke="#E8622A" stroke-width="1.2" opacity=".5"/>
-    <polygon points="445,25 510,120 380,120" fill="#E8622A" opacity=".07"/>
-    <polygon points="395,30 495,140 295,140" fill="none" stroke="#E8622A" stroke-width=".8" opacity=".25"/>
-    <rect x="400" y="45" width="80" height="80" rx="3" fill="none" stroke="#E8622A" stroke-width="1" opacity=".3" transform="rotate(15 440 85)"/>
-    <rect x="415" y="55" width="55" height="55" rx="3" fill="#E8622A" opacity=".1" transform="rotate(15 442 82)"/>
-    <circle cx="420" cy="75" r="5" fill="#E8622A" opacity=".9"/>
-    <rect x="310" y="30" width="40" height="8" rx="4" fill="#E8622A" opacity=".6"/>
-    <rect x="310" y="46" width="28" height="8" rx="4" fill="#E8622A" opacity=".35"/>
-    <rect x="310" y="62" width="34" height="8" rx="4" fill="#E8622A" opacity=".2"/>
-    <text x="36" y="62" font-family="Syne,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Visual identity</text>
-    <text x="36" y="88" font-family="Inter,sans-serif" font-size="13" fill="white" opacity=".38">Step 5 of 7</text>
-  </svg>
-  <div class="sbody">
-    <div class="slabel">Step 5 of 7</div>
-    <div class="stitle">Visual identity</div>
-    <div class="ssub">Even if you don't have a full brand yet, your answers give me a starting point for the visual direction.</div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-assets">Do you have a logo, brand colours, or existing visual style?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Don't worry if nothing is defined yet — that's common. Share what exists: a logo file, colour codes, a font you love, or just a mood you're going for.</div>
-      <div class="selwrap">
-        <select id="f-assets" name="Visual assets">
-          <option value="" disabled selected>Select one</option>
-          <option>Yes — logo, colours, and fonts all defined</option>
-          <option>Partially — some elements but not a full system</option>
-          <option>No — starting from scratch</option>
-          <option>Not sure — I'll share what I have</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel">What visual feeling do you want to convey?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Pick as many as apply. These become design filters for every graphic, photo, and layout we create — can select multiple.</div>
-      <div class="choices" role="group" aria-label="Visual mood">
-        <input class="ci" type="checkbox" name="Visual mood" id="vm1" value="Clean and minimal"><label class="cl" for="vm1">Clean &amp; minimal</label>
-        <input class="ci" type="checkbox" name="Visual mood" id="vm2" value="Bold and colourful"><label class="cl" for="vm2">Bold &amp; colourful</label>
-        <input class="ci" type="checkbox" name="Visual mood" id="vm3" value="Warm and natural"><label class="cl" for="vm3">Warm &amp; natural</label>
-        <input class="ci" type="checkbox" name="Visual mood" id="vm4" value="Sleek and corporate"><label class="cl" for="vm4">Sleek &amp; corporate</label>
-        <input class="ci" type="checkbox" name="Visual mood" id="vm5" value="Playful and creative"><label class="cl" for="vm5">Playful &amp; creative</label>
-        <input class="ci" type="checkbox" name="Visual mood" id="vm6" value="Elegant and refined"><label class="cl" for="vm6">Elegant &amp; refined</label>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-visref">Any brands or accounts whose visual style you admire?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">These don't need to be in your industry. Visual references speak louder than descriptions — if you love how any brand looks, share it.</div>
-      <input type="text" id="f-visref" name="Visual references" placeholder="@handles, brand names, or website URLs">
-    </div>
-
-    <div class="nav">
-      <button type="button" class="btn bbk" onclick="prevStep(4)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <button type="button" class="btn bnx" onclick="nextStep(4)">
-        Continue
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ── STEP 6: Goals & platforms ── -->
-<div class="step-card" id="step-5">
-  <svg class="sg" viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="140" fill="#0D1B2A"/>
-    <rect x="340" y="90"  width="22" height="40" rx="3" fill="#E8622A" opacity=".2"/>
-    <rect x="370" y="70"  width="22" height="60" rx="3" fill="#E8622A" opacity=".35"/>
-    <rect x="400" y="50"  width="22" height="80" rx="3" fill="#E8622A" opacity=".55"/>
-    <rect x="430" y="30"  width="22" height="100" rx="3" fill="#E8622A" opacity=".8"/>
-    <rect x="460" y="15"  width="22" height="115" rx="3" fill="#E8622A" opacity=".95"/>
-    <circle cx="471" cy="12" r="5" fill="white" opacity=".9"/>
-    <line x1="330" y1="130" x2="495" y2="130" stroke="white" stroke-width=".8" opacity=".12"/>
-    <text x="36" y="62" font-family="Syne,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Goals &amp; platforms</text>
-    <text x="36" y="88" font-family="Inter,sans-serif" font-size="13" fill="white" opacity=".38">Step 6 of 7</text>
-  </svg>
-  <div class="sbody">
-    <div class="slabel">Step 6 of 7</div>
-    <div class="stitle">Goals &amp; platforms</div>
-    <div class="ssub">What do you want social media to actually do for your business? Let's be specific.</div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel">What is your main goal right now? <span class="req">*</span></label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Pick your top priority — this shapes the entire content strategy. Awareness content looks very different from lead-generation content.</div>
-      <div class="choices" role="group" aria-label="Main goal">
-        <input class="ci" type="radio" name="Main goal" id="g1" value="Get more clients or enquiries" required><label class="cl" for="g1">Get clients / enquiries</label>
-        <input class="ci" type="radio" name="Main goal" id="g2" value="Build brand awareness"><label class="cl" for="g2">Build awareness</label>
-        <input class="ci" type="radio" name="Main goal" id="g3" value="Educate my audience"><label class="cl" for="g3">Educate my audience</label>
-        <input class="ci" type="radio" name="Main goal" id="g4" value="Grow a community"><label class="cl" for="g4">Grow a community</label>
-        <input class="ci" type="radio" name="Main goal" id="g5" value="Drive traffic to my website or offer"><label class="cl" for="g5">Drive website traffic</label>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel">Which platforms are you on — or want to be?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Each platform has a different rhythm and audience. I'll tailor the strategy to what you're actually using — not what sounds impressive.</div>
-      <div class="choices" role="group" aria-label="Platforms">
-        <input class="ci" type="checkbox" name="Platforms" id="p1" value="Instagram"><label class="cl" for="p1">Instagram</label>
-        <input class="ci" type="checkbox" name="Platforms" id="p2" value="Facebook"><label class="cl" for="p2">Facebook</label>
-        <input class="ci" type="checkbox" name="Platforms" id="p3" value="LinkedIn"><label class="cl" for="p3">LinkedIn</label>
-        <input class="ci" type="checkbox" name="Platforms" id="p4" value="TikTok"><label class="cl" for="p4">TikTok</label>
-        <input class="ci" type="checkbox" name="Platforms" id="p5" value="YouTube"><label class="cl" for="p5">YouTube</label>
-        <input class="ci" type="checkbox" name="Platforms" id="p6" value="Not sure yet"><label class="cl" for="p6">Not sure yet</label>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-budget">Do you have a budget for paid ads?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Not a commitment — just helps me understand if we're working organic-only or if there's room to amplify with paid promotion later.</div>
-      <div class="selwrap">
-        <select id="f-budget" name="Ads budget">
-          <option value="" disabled selected>Select an option</option>
-          <option>No budget for ads right now</option>
-          <option>Under $200/month</option>
-          <option>$200–$500/month</option>
-          <option>$500–$1,000/month</option>
-          <option>Over $1,000/month</option>
-          <option>Not sure yet</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="nav">
-      <button type="button" class="btn bbk" onclick="prevStep(5)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <button type="button" class="btn bnx" onclick="nextStep(5)">
-        Continue
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- ── STEP 7: Final notes ── -->
-<div class="step-card" id="step-6">
-  <svg class="sg" viewBox="0 0 560 140" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="560" height="140" fill="#0D1B2A"/>
-    <polygon points="500,70 370,35 390,70" fill="none" stroke="#E8622A" stroke-width="1.5" opacity=".8"  stroke-linejoin="round"/>
-    <polygon points="500,70 370,105 390,70" fill="none" stroke="#E8622A" stroke-width="1.5" opacity=".55" stroke-linejoin="round"/>
-    <polygon points="390,70 370,35 370,105" fill="#E8622A" opacity=".12"/>
-    <line x1="390" y1="70" x2="500" y2="70" stroke="#E8622A" stroke-width=".8" opacity=".3"/>
-    <line x1="370" y1="35"  x2="340" y2="23"  stroke="#E8622A" stroke-width=".7" opacity=".2" stroke-dasharray="4 3"/>
-    <line x1="370" y1="105" x2="340" y2="117" stroke="#E8622A" stroke-width=".7" opacity=".2" stroke-dasharray="4 3"/>
-    <circle cx="330" cy="70" r="3"   fill="#E8622A" opacity=".5"/>
-    <circle cx="310" cy="70" r="2.2" fill="#E8622A" opacity=".32"/>
-    <circle cx="293" cy="70" r="1.6" fill="#E8622A" opacity=".2"/>
-    <circle cx="279" cy="70" r="1.2" fill="#E8622A" opacity=".12"/>
-    <circle cx="500" cy="70" r="4.5" fill="#E8622A" opacity="1"/>
-    <text x="36" y="62" font-family="Syne,sans-serif" font-weight="700" font-size="21" fill="white" opacity=".92">Almost there</text>
-    <text x="36" y="88" font-family="Inter,sans-serif" font-size="13" fill="white" opacity=".38">Step 7 of 7</text>
-  </svg>
-  <div class="sbody">
-    <div class="slabel">Step 7 of 7</div>
-    <div class="stitle">Last few things</div>
-    <div class="ssub">Two quick questions and you're done — these help me see the full picture before we start.</div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel">Are you comfortable appearing in video content?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">Video is one of the highest-performing formats right now. Knowing your comfort level helps me design a strategy that challenges you — but never past what feels right.</div>
-      <div class="choices" role="group" aria-label="Video comfort">
-        <input class="ci" type="radio" name="Video" id="vc1" value="Yes, comfortable on camera"><label class="cl" for="vc1">Yes, comfortable</label>
-        <input class="ci" type="radio" name="Video" id="vc2" value="Yes, but I need to prepare"><label class="cl" for="vc2">Yes, with prep</label>
-        <input class="ci" type="radio" name="Video" id="vc3" value="Behind the scenes only"><label class="cl" for="vc3">Behind the scenes only</label>
-        <input class="ci" type="radio" name="Video" id="vc4" value="Prefer not to appear on video"><label class="cl" for="vc4">Prefer not to</label>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="fh">
-        <label class="flabel" for="f-notes">Anything else on your mind?</label>
-        <button type="button" class="ibtn" onclick="toggleTip(this)" aria-label="Why we need this">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#8A8F99" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="17"/><circle cx="12" cy="7.5" r=".8" fill="#8A8F99" stroke="none"/></svg>
-        </button>
-      </div>
-      <div class="tip">A launch date, a past marketing experience that didn't work, something specific coming up, or a worry you want me to know about. No detail is wasted here.</div>
-      <textarea id="f-notes" name="Extra notes" placeholder="Anything else on your mind"></textarea>
-    </div>
-
-    <div class="nav">
-      <button type="button" class="btn bbk" onclick="prevStep(6)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back
-      </button>
-      <button type="submit" class="btn bsb" id="submitBtn">
-        Send it over
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-      </button>
-    </div>
-  </div>
-</div>
-
-</form>
-
-<!-- ── THANK YOU ── -->
-<div class="ty" id="thankyou" role="alert" aria-live="polite">
-  <div class="tyicon">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E8622A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-  </div>
-  <h2>You're all set.</h2>
-  <p>Thanks for taking the time — I'll go through everything carefully and get back to you within 48 hours. Looking forward to building something with you.</p>
-  <div class="tysig">— Moises Macias</div>
-</div>
-
-</div><!-- /form-area -->
-</div><!-- /outer -->
 
 <script>
+// Screen navigation
+function showProcess() {
+  document.getElementById('heroScreen').classList.remove('active');
+  document.getElementById('processScreen').classList.add('active');
+  window.scrollTo({ top: 0 });
+  // Animate phases in
+  setTimeout(() => {
+    document.querySelectorAll('.phase').forEach((p, i) => {
+      setTimeout(() => p.classList.add('visible'), i * 120);
+    });
+  }, 200);
+}
+
+function showForm() {
+  document.getElementById('processScreen').classList.remove('active');
+  document.getElementById('formScreen').classList.add('active');
+  window.scrollTo({ top: 0 });
+  updateUI();
+}
+
+// Keyboard support for hero CTA
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('heroScreen').classList.contains('active')) showProcess();
+});
+
+// Form logic
 const TOTAL = 7;
 let cur = 0;
-
-function startForm() {
-  document.getElementById('welcomeScreen').classList.add('hidden');
-  document.getElementById('formArea').classList.add('visible');
-  updateUI();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 
 function toggleTip(btn) {
   const tip = btn.closest('.fh').nextElementSibling;
@@ -1065,36 +1103,28 @@ function nextStep(from) {
   const card = document.getElementById('step-' + from);
   let valid = true;
   let firstError = null;
-
   card.querySelectorAll('[required]').forEach(el => {
     if (el.type === 'radio') {
       const grp = card.querySelectorAll('[name="' + el.name + '"]');
       if (!Array.from(grp).some(r => r.checked)) {
         valid = false;
         const wrap = el.closest('.field').querySelector('.choices');
+        if (wrap && !firstError) firstError = wrap;
         if (wrap) {
           wrap.style.outline = '2px solid #E8622A';
           wrap.style.borderRadius = '8px';
           wrap.style.padding = '6px';
           setTimeout(() => { wrap.style.outline = ''; wrap.style.padding = ''; }, 2200);
-          if (!firstError) firstError = wrap;
         }
       }
-    } else {
-      if (!el.value.trim()) {
-        valid = false;
-        el.classList.add('err');
-        setTimeout(() => el.classList.remove('err'), 2200);
-        if (!firstError) firstError = el;
-      }
+    } else if (!el.value.trim()) {
+      valid = false;
+      el.classList.add('err');
+      setTimeout(() => el.classList.remove('err'), 2200);
+      if (!firstError) firstError = el;
     }
   });
-
-  if (!valid) {
-    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-
+  if (!valid) { if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
   card.classList.remove('active');
   cur++;
   document.getElementById('step-' + cur).classList.add('active');
@@ -1115,7 +1145,6 @@ document.getElementById('mainForm').addEventListener('submit', function(e) {
   const btn = document.getElementById('submitBtn');
   btn.textContent = 'Sending…';
   btn.disabled = true;
-
   fetch(this.action, {
     method: 'POST',
     body: new FormData(this),
@@ -1123,11 +1152,9 @@ document.getElementById('mainForm').addEventListener('submit', function(e) {
   })
   .then(r => {
     if (r.ok) {
-      document.getElementById('step-6').classList.remove('active');
-      document.getElementById('thankyou').classList.add('active');
-      document.getElementById('progfill').style.width = '100%';
-      document.getElementById('stepctr').textContent = 'Done ✓';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('formScreen').classList.remove('active');
+      document.getElementById('tyScreen').classList.add('active');
+      window.scrollTo({ top: 0 });
     } else {
       btn.textContent = 'Try again';
       btn.disabled = false;
@@ -1137,7 +1164,7 @@ document.getElementById('mainForm').addEventListener('submit', function(e) {
   .catch(() => {
     btn.textContent = 'Try again';
     btn.disabled = false;
-    alert('Connection issue. Please check your internet and try again.');
+    alert('Connection issue. Please try again.');
   });
 });
 </script>
